@@ -183,6 +183,7 @@ class SourceCodeCog(commands.Cog):
         split_source = [f'{i+1:03d} |  {value}' for i, value in enumerate(source.splitlines())]
 
         if line_start and line_start <= 0:
+<<<<<<< HEAD
             line_start = 1
         
         filtered_source = split_source[line_start-1 if line_start else 0: line_stop or len(source)]
@@ -190,6 +191,8 @@ class SourceCodeCog(commands.Cog):
         split_source = [f'{i+1:03d} |  {value}' for i, value in enumerate(source.splitlines())]
 
         if line_start is not None and line_start <= 0:
+=======
+>>>>>>> Cleaned up syntax in if statement
             line_start = 1
         
         filtered_source = split_source[line_start-1 if line_start else 0: line_stop or len(source)]
