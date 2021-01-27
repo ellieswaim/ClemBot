@@ -127,7 +127,7 @@ class SourceCodeCog(commands.Cog):
             if not source:
                 return
 
-            if line_stop is not None and len(source.splitlines()) <= line_stop:
+            if line_stop is not None and len(source.splitlines()) < line_stop:
                 embed = discord.Embed(title= f'Error: End line number too high', color= Colors.Error)
                 await ctx.send(embed= embed)
                 return
@@ -180,7 +180,6 @@ class SourceCodeCog(commands.Cog):
             yield iterable[i:i + chunk_size]
     
     def process_source(self, source: str, line_start: int = None, line_stop: int = None):
-<<<<<<< HEAD
         split_source = [f'{i+1:03d} |  {value}' for i, value in enumerate(source.splitlines())]
 
         if line_start and line_start <= 0:
@@ -188,9 +187,13 @@ class SourceCodeCog(commands.Cog):
         
         filtered_source = split_source[line_start-1 if line_start else 0: line_stop or len(source)]
 =======
-        split_source = [f'{i:03d} |  {value}' for i, value in enumerate(source.splitlines())]
-        filtered_source = split_source[line_start or 0: line_stop+1 or len(source)]
->>>>>>> #142 Made source cog's print function inclusive of
+        split_source = [f'{i+1:03d} |  {value}' for i, value in enumerate(source.splitlines())]
+
+        if line_start is not None and line_start <= 0:
+            line_start = 1
+        
+        filtered_source = split_source[line_start-1 if line_start else 0: line_stop or len(source)]
+>>>>>>> Changed counting in print from starting at 0 to 1
 
         return filtered_source
     
